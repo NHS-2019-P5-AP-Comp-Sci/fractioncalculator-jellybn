@@ -34,6 +34,10 @@ public class FracCalc {
     	int lastSpace = input.lastIndexOf(' ');
     	String lastFrac = input.substring(lastSpace + 1, input.length());
     	
+    	int firstSpace = input.indexOf(' ');
+    	String firstFrac = input.substring(0, firstSpace);
+    	
+    	String operator = input.substring(firstSpace + 1, lastSpace);
         return lastFrac;
     }
 
