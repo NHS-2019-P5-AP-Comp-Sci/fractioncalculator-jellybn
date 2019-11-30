@@ -54,7 +54,8 @@ public class FracCalc {
     	int firstNumer = numer(firstUnder, firstSlash, firstFrac);
     	int firstDenom = denom(firstUnder, firstSlash, firstFrac);
     	
-    	String answer1 = splitFrac(firstUnder, firstSlash, firstFrac);
+    	//used for CHECKPOINT 2
+    	//String answer1 = splitFrac(firstUnder, firstSlash, firstFrac);
     	
     	//splitting up the last fraction below
     	
@@ -65,15 +66,21 @@ public class FracCalc {
     	int lastNumer = numer(lastUnder, lastSlash, lastFrac);
     	int lastDenom = denom(lastUnder, lastSlash, lastFrac);
     	
-    	String answer2 = splitFrac(lastUnder, lastSlash, lastFrac);
+    	//used for CHECKPOINT 2
+    	//String answer2 = splitFrac(lastUnder, lastSlash, lastFrac);
+    	    	
+    	String answer = computeFrac(firstWhole, firstNumer, firstDenom,
+    			lastWhole, lastNumer, lastDenom, operator);
     	
-        return answer2;
+        return answer;
+        
     }
     
     
     // TODO: Fill in the space below with any helper methods that you think you will need
     
-    // this splits the fraction and provides the string result
+    /* this splits the fraction and provides the string result--used for CHECKPOINT 2
+     * 
     public static String splitFrac(int under, int slash, String frac) {
     	String answer;
     	
@@ -93,6 +100,8 @@ public class FracCalc {
     	
     	return answer;
     }
+    *
+    */
     
     //this gives the whole number of a fraction
     public static int wholeNum(int under, int slash, String frac) {
@@ -134,4 +143,36 @@ public class FracCalc {
     	
     	return denom;
     }
+    
+    //this computes the final fraction    
+    public static String computeFrac(int w1, int n1, int d1, int w2, int n2, int d2, String oper) {
+    	
+    	//w1*d1+n1
+    	//w2*d2+n2
+    	
+    	int totalNumer = 0;
+    	int totalDenom = d1*d2;
+    	
+    	if (oper.equals("+")) {
+    		totalNumer = (w1*d1+n1)*d2 + (w2*d2+n2)*d1;
+    	} else if (oper.equals("-")) {
+    		totalNumer = (w1*d1+n1)*d2 - (w2*d2+n2)*d1;
+    	} else if (oper.equals("*")) {
+    		totalNumer = (w1*d1+n1) * (w2*d2+n2);
+    	} else if (oper.equals("/")){
+    		totalNumer = (w1*d1+n1) * d2;
+    		totalDenom = d2 * w2*d2+n2;
+    	} else {
+    		return "Error: Please use one of the following operators: +, -, *, /";
+    	}
+    	
+    	if (totalDenom == 0) return "Error: Cannot divide by zero";
+    	
+    	return totalNumer + "/" + totalDenom;
+    }
 }
+
+
+
+
+
